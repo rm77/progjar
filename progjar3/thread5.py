@@ -39,10 +39,12 @@ def main():
     star1 = Star(1)
     star2 = Star(10)
     star3 = Star(15)
+    star4 = Star(20)
     
     star1.start()
     star2.start()
     star3.start()
+    star4.start()   
 
 if __name__ == "__main__":
     try: 
