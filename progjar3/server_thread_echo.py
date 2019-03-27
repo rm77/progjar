@@ -5,6 +5,10 @@ import thread
 import time
 import sys
 
+def echo_server(input_data):
+    output_data = input_data
+    return output_data
+
 class ProcessTheClient(threading.Thread):
 	def __init__(self,connection,address):
 		self.connection = connection
@@ -15,7 +19,7 @@ class ProcessTheClient(threading.Thread):
 		while True:
 			data = self.connection.recv(32)
 			if data:
-				self.connection.sendall(data)
+				self.connection.sendall(echo_server(data))
 			else:
 				break
 		self.connection.close()
