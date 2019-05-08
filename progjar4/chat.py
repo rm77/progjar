@@ -19,6 +19,12 @@ class Chat:
 				username=j[1].strip()
 				password=j[2].strip()
 				return self.autentikasi_user(username,password)
+			elif (command=='send'):
+				sessionid = j[1].strip()
+				usernameto = j[2].strip()
+				message = j[3].strip()
+				usernamefrom = self.sessions[sessionid]['username']
+				return self.send_message(sessionid,usernamefrom,usernameto,message)
 			else:
 				return {'status': 'ERROR', 'message': 'Protocol Tidak Benar'}
 		except IndexError:
@@ -29,7 +35,7 @@ class Chat:
  		if (self.users[username]['password']!= password):
 			return { 'status': 'ERROR', 'message': 'Password Salah' }
 		tokenid = str(uuid.uuid4()) 
-		self.sessions[tokenid]=self.users[username]
+		self.sessions[tokenid]={ 'username': username, 'userdetail':self.users[username]}
 		return { 'status': 'OK', 'tokenid': tokenid }
 	def get_user(self,username):
 		if (username not in self.users):
@@ -73,11 +79,12 @@ class Chat:
 
 if __name__=="__main__":
 	j = Chat()
-        sesi = j.proses("auth xmessi surabaya")
+        sesi = j.proses("auth messi surabaya")
 	print sesi
 	#sesi = j.autentikasi_user('messi','surabaya')
 	#print sesi
-	#tokenid = sesi['tokenid']
+	tokenid = sesi['tokenid']
+	print j.proses("send {} henderson helloson " . format(tokenid))
 	#print j.send_message(tokenid,'messi','henderson','hello son')
 	#print j.send_message(tokenid,'henderson','messi','hello si')
 	#print j.send_message(tokenid,'lineker','messi','hello si dari lineker')
