@@ -14,10 +14,10 @@ class Chat:
 	def proses(self,data):
 		j=data.split(" ")
 		try:
-			command=j[0]
+			command=j[0].strip()
 			if (command=='auth'):
-				username=j[1]
-				password=j[2]
+				username=j[1].strip()
+				password=j[2].strip()
 				return self.autentikasi_user(username,password)
 			else:
 				return {'status': 'ERROR', 'message': 'Protocol Tidak Benar'}
@@ -73,9 +73,30 @@ class Chat:
 
 if __name__=="__main__":
 	j = Chat()
-	print j.send_message('xmessi','0','henderson','hello son')
-	print j.send_message('henderson','0','messi','hello si')
-	print j.send_message('lineker','0','messi','hello si dari lineker')
+        sesi = j.proses("auth xmessi surabaya")
+	print sesi
+	#sesi = j.autentikasi_user('messi','surabaya')
+	#print sesi
+	#tokenid = sesi['tokenid']
+	#print j.send_message(tokenid,'messi','henderson','hello son')
+	#print j.send_message(tokenid,'henderson','messi','hello si')
+	#print j.send_message(tokenid,'lineker','messi','hello si dari lineker')
 
 
-	print j.get_inbox('messi')
+	#print j.get_inbox('messi')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
