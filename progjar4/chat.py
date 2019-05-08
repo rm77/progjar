@@ -30,7 +30,7 @@ class Chat:
 			return { 'status': 'ERROR', 'message': 'Password Salah' }
 		tokenid = str(uuid.uuid4()) 
 		self.sessions[tokenid]=self.users[username]
-		return { 'status': 'OK', 'token': tokenid }
+		return { 'status': 'OK', 'tokenid': tokenid }
 	def get_user(self,username):
 		if (username not in self.users):
 			return False
@@ -73,12 +73,9 @@ class Chat:
 
 if __name__=="__main__":
 	j = Chat()
-	print j.proses('auth messi surabaya')
-
-#print j.send_message('xmessi','henderson','hello son')
-#print j.send_message('henderson','messi','hello si')
-#print j.send_message('lineker','messi','hello si dari lineker')
+	print j.send_message('xmessi','0','henderson','hello son')
+	print j.send_message('henderson','0','messi','hello si')
+	print j.send_message('lineker','0','messi','hello si dari lineker')
 
 
-#print j.get_inbox('messi')
-#
+	print j.get_inbox('messi')
