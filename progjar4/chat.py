@@ -18,6 +18,7 @@ class Chat:
 			if (command=='auth'):
 				username=j[1].strip()
 				password=j[2].strip()
+                                print "auth {}" . format(username)
 				return self.autentikasi_user(username,password)
 			elif (command=='send'):
 				sessionid = j[1].strip()
@@ -26,11 +27,17 @@ class Chat:
                                 for w in j[3:]:
                                     message="{} {}" . format(message,w)
 				usernamefrom = self.sessions[sessionid]['username']
-				return self.send_message(sessionid,usernamefrom,usernameto,message.strip())
+                                print "send message from {} to {}" . format(usernamefrom,usernameto)
+				return self.send_message(sessionid,usernamefrom,usernameto,message)
+                        elif (command=='inbox'):
+                                sessionid = j[1].strip()
+                                username = self.sessions[sessionid]['username']
+                                print "inbox {}" . format(sessionid)
+                                return self.get_inbox(username)
 			else:
-				return {'status': 'ERROR', 'message': 'Protocol Tidak Benar'}
+				return {'status': 'ERROR', 'message': '**Protocol Tidak Benar'}
 		except IndexError:
-			return {'status': 'ERROR', 'message': 'Protocol Tidak Benar'}
+			return {'status': 'ERROR', 'message': '--Protocol Tidak Benar'}
 	def autentikasi_user(self,username,password):
 		if (username not in self.users):
 			return { 'status': 'ERROR', 'message': 'User Tidak Ada' }
