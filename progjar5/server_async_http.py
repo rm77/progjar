@@ -25,7 +25,7 @@ class Server(asyncore.dispatcher):
                 pair = self.accept()
                 if pair is not None:
 		        sock, addr = pair
-		        print >> sys.stderr, 'connection from', pair
+		        print >> sys.stderr, 'connection from', repr(addr)
 	                handler = ProcessTheClient(sock)
 
 def main():
