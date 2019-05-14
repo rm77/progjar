@@ -19,7 +19,8 @@ class ProcessTheClient(threading.Thread):
 		while True:
 			data = self.connection.recv(1024)
 			if data:
-				self.connection.sendall("{}\r\n\r\n" . format(httpserver.proses(data)))
+				self.connection.sendall("{}" . format(httpserver.proses(data)))
+                                break
 			else:
 				break
 		self.connection.close()

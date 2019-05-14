@@ -15,7 +15,7 @@ class HttpServer:
 	def response(self,kode=404,message='Not Found',messagebody='',headers={}):
 		tanggal = datetime.now().strftime('%c')
 		resp=[]
-		resp.append("HTTP/1.1 {} {}\r\n" . format(kode,message))
+		resp.append("HTTP/1.0 {} {}\r\n" . format(kode,message))
 		resp.append("Date: {}\r\n" . format(tanggal))
 		resp.append("Connection: close\r\n")
 		resp.append("Server: myserver/1.0\r\n")
@@ -67,7 +67,7 @@ class HttpServer:
 
 if __name__=="__main__":
 	httpserver = HttpServer()
-	d = httpserver.proses('GET testing.txt HTTP/1.1')
+	d = httpserver.proses('GET testing.txt HTTP/1.0')
 	print d
         d = httpserver.http_get('testing2.txt')
 	print d
