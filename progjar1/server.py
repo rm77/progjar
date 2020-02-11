@@ -19,7 +19,7 @@ while True:
         print(f"received {data}")
         if data:
             print("sending back data")
-            connection.sendall('-->'+data)
+            connection.sendall(data)
         else:
             #print >>sys.stderr, 'no more data from', client_address
             print(f"no more data from {client_address}")
