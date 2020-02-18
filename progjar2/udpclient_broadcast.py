@@ -13,7 +13,7 @@ sock.setsockopt(socket.SOL_SOCKET,socket.SO_BROADCAST, 1)
 angka = 0
 while True:
     angka = angka+1
-    msg = " ini angka {} " . format(angka)
+    msg = " BROADCAST ini angka {} " . format(angka)
     print(msg)
     sock.sendto(msg.encode(), ("255.255.255.255", TARGET_PORT))
     time.sleep(1)
