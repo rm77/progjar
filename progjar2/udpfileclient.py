@@ -16,4 +16,4 @@ terkirim=0
 for x in k:
    sock.sendto(x, (TARGET_IP, TARGET_PORT))
    terkirim = terkirim + 1
-   print "\r terkirim {} of {} " . format(terkirim,ukuran)
+   print(f"terkirim {terkirim} of {ukuran} ")

@@ -6,7 +6,10 @@ SERVER_PORT = 5005
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind((SERVER_IP, SERVER_PORT))
+sock.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEPORT, 1)
+sock.setsockopt(socket.SOL_SOCKET,socket.SO_BROADCAST, 1)
+
+sock.bind(("", SERVER_PORT))
 
 
 
@@ -15,6 +18,3 @@ while True:
     #buffer size 1024
     print("diterima ", data)
     print("dikirim oleh " , addr)
-
-
-
