@@ -11,9 +11,11 @@ sock.bind((SERVER_IP, SERVER_PORT))
 fp = open(NAMAFILE,'wb+')
 ditulis=0
 
+counter=0
 while True:
     data, addr = sock.recvfrom(1024)
-    print("blok ", len(data), data[0:10])
+    counter=counter+len(data)
+    print(addr," blok ", counter,"panjang : ",len(data), data)
     fp.write(data)
 
 

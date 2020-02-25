@@ -16,4 +16,4 @@ for x in k:
    k_bytes = bytes([x])
    sock.sendto(k_bytes, (TARGET_IP, TARGET_PORT))
    terkirim = terkirim + 1
-   print(f"terkirim {terkirim} of {ukuran} ")
+   print(k_bytes,f"terkirim {terkirim} of {ukuran} ")
