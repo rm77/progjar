@@ -1,22 +1,20 @@
 import threading
 import time
 import datetime
+import logging
 
 def worker(nomor):
+    counter = 0
     while True:
-        waktu = datetime.datetime.now()
-        print("{} Saya worker nomor {} \n".format(waktu, nomor))
+        counter = counter + 1
+        waktu = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:s")
+        logging.warning(f"{waktu} saya adalah worker {nomor} counter {counter}")
         time.sleep(1)
     return
 
 
-threads = []
 for i in range(5):
     t = threading.Thread(target=worker,args=(i,))
-    threads.append(t)
-    
-for thr in threads:
-    thr.start()
-	
+    t.start()
 
 
