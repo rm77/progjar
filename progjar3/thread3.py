@@ -5,7 +5,7 @@ import datetime
 def worker(nomor):
     while True:
         waktu = datetime.datetime.now()
-    	print "{} Saya worker nomor {} \n" . format(waktu,nomor)
+        print("{} Saya worker nomor {} \n".format(waktu, nomor))
         time.sleep(1)
     return
 

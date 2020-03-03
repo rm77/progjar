@@ -30,9 +30,8 @@ class UdpServer(threading.Thread):
 			data,addr = self.sock.recvfrom(1024)
 			for k in all_files:
 				self.sock.sendto(all_files[k],addr)
-				print "kirim nama file",k
- 				print "ke ", addr
-			
+				print("kirim nama file",k," ke ",addr)
+
 
 
 def main():
@@ -50,4 +49,4 @@ if __name__ == "__main__":
       while True:
         pass
     except KeyboardInterrupt:
-      print " Program Stop .."
+      print(" Program Stop ..")

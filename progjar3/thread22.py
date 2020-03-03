@@ -5,21 +5,21 @@ import datetime
 def fungsi3():
     while True:
         waktu = datetime.datetime.now()
-        print "{} saya adalah fungsi 3 yang berjalan \n" . format(waktu)
+        print("{} saya adalah fungsi 3 yang berjalan \n" . format(waktu))
         time.sleep(4)
     return
 
 def fungsi2():
     while True:
         waktu = datetime.datetime.now()
-        print "{} saya adalah fungsi 2 yang berjalan \n" . format(waktu)
+        print("{} saya adalah fungsi 2 yang berjalan \n" . format(waktu))
         time.sleep(2)
     return
 
 def fungsi1():
     while True:
         waktu = datetime.datetime.now()
-    	print "{} Saya fungsi 1  \n" . format(waktu)
+        print("{} saya adalah fungsi 1 yang berjalan \n".format(waktu))
         time.sleep(1)
     return
 

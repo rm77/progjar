@@ -3,7 +3,7 @@ import datetime
 
 def worker(nomor):
     waktu = datetime.datetime.now()
-    print "{} Saya worker nomor {} \n" . format(waktu,nomor)
+    print("{} Saya worker nomor {} \n" . format(waktu,nomor))
     return
 
 

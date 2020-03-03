@@ -1,7 +1,7 @@
 from socket import *
 import socket
 import threading
-import thread
+import logging
 import time
 import sys
 
@@ -35,7 +35,7 @@ class Server(threading.Thread):
 		self.my_socket.listen(1)
 		while True:
 			self.connection, self.client_address = self.my_socket.accept()
-			print >> sys.stderr, 'connection from', self.client_address
+			logging.warning(f"connection from {self.client_address}")
 			
 			clt = ProcessTheClient(self.connection, self.client_address)
 			clt.start()
