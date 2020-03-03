@@ -9,7 +9,7 @@ def kirim_data(nama="kosong"):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     logging.warning("membuka socket")
 
-    server_address = ('localhost', 10000)
+    server_address = ('localhost', 8889)
     logging.warning(f"opening socket {server_address}")
     sock.connect(server_address)
 
