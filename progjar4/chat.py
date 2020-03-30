@@ -2,7 +2,8 @@ import sys
 import os
 import json
 import uuid
-from Queue import *
+import logging
+from queue import  Queue
 
 class Chat:
 	def __init__(self):
@@ -18,30 +19,32 @@ class Chat:
 			if (command=='auth'):
 				username=j[1].strip()
 				password=j[2].strip()
-                                print "auth {}" . format(username)
+				logging.warning("AUTH: auth {} {}" . format(username,password))
 				return self.autentikasi_user(username,password)
 			elif (command=='send'):
 				sessionid = j[1].strip()
 				usernameto = j[2].strip()
-                                message=""
-                                for w in j[3:]:
-                                    message="{} {}" . format(message,w)
+				message=""
+				for w in j[3:]:
+					message="{} {}" . format(message,w)
 				usernamefrom = self.sessions[sessionid]['username']
-                                print "send message from {} to {}" . format(usernamefrom,usernameto)
+				logging.warning("SEND: session {} send message from {} to {}" . format(sessionid, usernamefrom,usernameto))
 				return self.send_message(sessionid,usernamefrom,usernameto,message)
-                        elif (command=='inbox'):
-                                sessionid = j[1].strip()
-                                username = self.sessions[sessionid]['username']
-                                print "inbox {}" . format(sessionid)
-                                return self.get_inbox(username)
+			elif (command=='inbox'):
+				sessionid = j[1].strip()
+				username = self.sessions[sessionid]['username']
+				logging.warning("INBOX: {}" . format(sessionid))
+				return self.get_inbox(username)
 			else:
 				return {'status': 'ERROR', 'message': '**Protocol Tidak Benar'}
+		except KeyError:
+			return { 'status': 'ERROR', 'message' : 'Informasi tidak ditemukan'}
 		except IndexError:
 			return {'status': 'ERROR', 'message': '--Protocol Tidak Benar'}
 	def autentikasi_user(self,username,password):
 		if (username not in self.users):
 			return { 'status': 'ERROR', 'message': 'User Tidak Ada' }
- 		if (self.users[username]['password']!= password):
+		if (self.users[username]['password']!= password):
 			return { 'status': 'ERROR', 'message': 'Password Salah' }
 		tokenid = str(uuid.uuid4()) 
 		self.sessions[tokenid]={ 'username': username, 'userdetail':self.users[username]}
@@ -88,18 +91,23 @@ class Chat:
 
 if __name__=="__main__":
 	j = Chat()
-        sesi = j.proses("auth messi surabaya")
-	print sesi
+	sesi = j.proses("auth messi surabaya")
+	print(sesi)
 	#sesi = j.autentikasi_user('messi','surabaya')
 	#print sesi
 	tokenid = sesi['tokenid']
-	print j.proses("send {} henderson hello gimana kabarnya son " . format(tokenid))
+	print(j.proses("send {} henderson hello gimana kabarnya son " . format(tokenid)))
+	print(j.proses("send {} messi hello gimana kabarnya mess " . format(tokenid)))
+
 	#print j.send_message(tokenid,'messi','henderson','hello son')
 	#print j.send_message(tokenid,'henderson','messi','hello si')
 	#print j.send_message(tokenid,'lineker','messi','hello si dari lineker')
 
 
-	print j.get_inbox('messi')
+	print("isi mailbox dari messi")
+	print(j.get_inbox('messi'))
+	print("isi mailbox dari henderson")
+	print(j.get_inbox('henderson'))
 
 
 
