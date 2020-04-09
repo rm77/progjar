@@ -34,7 +34,7 @@ class HttpServer:
 		requests = data.split("\r\n")
 		baris = requests[0]
 
-		print baris
+		print(baris)
 		j = baris.split(" ")
 		try:
 			method=j[0].upper().strip()
@@ -68,11 +68,11 @@ class HttpServer:
 if __name__=="__main__":
 	httpserver = HttpServer()
 	d = httpserver.proses('GET testing.txt HTTP/1.0')
-	print d
-        d = httpserver.http_get('testing2.txt')
-	print d
-        d = httpserver.http_get('testing.txt')
-	print d
+	print(d)
+	d = httpserver.http_get('testing2.txt')
+	print(d)
+	d = httpserver.http_get('testing.txt')
+	print(d)
 
 
 
