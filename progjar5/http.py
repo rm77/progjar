@@ -32,20 +32,27 @@ class HttpServer:
 	def proses(self,data):
 		
 		requests = data.split("\r\n")
-		baris = requests[0]
+		#print(requests)
 
-		print(baris)
+		baris = requests[0]
+		#print(baris)
+
+		all_headers = [n for n in requests[1:] if n!='']
+
 		j = baris.split(" ")
 		try:
 			method=j[0].upper().strip()
 			if (method=='GET'):
 				object_address = j[1].strip()
-				return self.http_get(object_address)
+				return self.http_get(object_address, all_headers)
+			if (method=='POST'):
+				object_address = j[1].strip()
+				return self.http_post(object_address, all_headers)
 			else:
 				return self.response(400,'Bad Request','',{})
 		except IndexError:
 			return self.response(400,'Bad Request','',{})
-	def http_get(self,object_address):
+	def http_get(self,object_address,headers):
 		files = glob('./*')
 		thedir='.'
 		if thedir+object_address not in files:
@@ -59,6 +66,10 @@ class HttpServer:
 		headers={}
 		headers['Content-type']=content_type
 		
+		return self.response(200,'OK',isi,headers)
+	def http_post(self,object_address,headers):
+		headers ={}
+		isi = "kosong"
 		return self.response(200,'OK',isi,headers)
 		
 			 	
