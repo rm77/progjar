@@ -32,6 +32,7 @@ class ProcessTheClient(threading.Thread):
 						self.connection.sendall(hasil.encode())
 						rcv=""
 						self.connection.close()
+						break
 				else:
 					break
 			except OSError as e:
