@@ -21,15 +21,20 @@ class ProcessTheClient(threading.Thread):
 			try:
 				data = self.connection.recv(32)
 				if data:
+					#merubah input dari socket (berupa bytes) ke dalam string
+					#agar bisa mendeteksi \r\n
 					d = data.decode()
 					rcv=rcv+d
 					if rcv[-2:]=='\r\n':
 						#end of command, proses string
 						logging.warning("data dari client: {}" . format(rcv))
 						hasil = httpserver.proses(rcv)
-						hasil=hasil+"\r\n\r\n"
+						#hasil akan berupa bytes
+						#untuk bisa ditambahi dengan string, maka string harus di encode
+						hasil=hasil+"\r\n\r\n".encode()
 						logging.warning("balas ke  client: {}" . format(hasil))
-						self.connection.sendall(hasil.encode())
+						#hasil sudah dalam bentuk bytes
+						self.connection.sendall(hasil)
 						rcv=""
 						self.connection.close()
 				else:
