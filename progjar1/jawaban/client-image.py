@@ -1,7 +1,7 @@
 import sys
 import socket
 
-ipserver = ['192.168.122.72', '192.168.122.171']
+ipserver = ['192.168.122.33', '192.168.122.10']
 
 for i in range(2):
 	# Create a TCP/IP socket
@@ -16,7 +16,7 @@ for i in range(2):
 	try:
 		# Send data
 		send_filename = 'sendimage.jpg'
-		recv_filename = 'recvimage.jpg'
+		recv_filename = 'recvimage' + str(i) + '.jpg'
 		size_img = 0;
 		with open(send_filename, 'rb') as file:
 		    sendfile = file.read() 
