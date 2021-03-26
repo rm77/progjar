@@ -17,7 +17,7 @@ for i in range(2):
 		# Send data
 		send_filename = 'sendimage.jpg'
 		recv_filename = 'recvimage' + str(i) + '.jpg'
-		size_img = 0;
+
 		with open(send_filename, 'rb') as file:
 		    sendfile = file.read() 
 		sock.sendall(sendfile)
@@ -31,7 +31,7 @@ for i in range(2):
 		        amount_received += len(data)
 		        if not data:
 		            break
-		        file.write(data);
+		        file.write(data)
 	finally:
 		print(f"{recv_filename} done")
 		sock.close()
