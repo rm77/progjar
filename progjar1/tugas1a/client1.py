@@ -1,5 +1,7 @@
 import sys
 import socket
+import random
+import string
 
 # Create a TCP/IP socket
 sock1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -16,7 +18,7 @@ sock2.connect(server_address2)
 
 try:
     # Send data
-    message = 'INI ADALAH DATA YANG DIKIRIM ABCDEFGHIJKLMNOPQ'
+    message = ''.join(random.choices(string.ascii_uppercase, k=100))
     print(f"sending {message}")
     sock1.sendall(message.encode())
     sock2.sendall(message.encode())
