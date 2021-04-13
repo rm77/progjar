@@ -16,7 +16,7 @@ for x in range(2):
         # Send data
         print(f"Masukkan nama file dengan ekstension, contoh : sea.png")
         fname = input()
-        rname = 'renameFromClient' + '_' + str(x+1) + '_' + fname
+        rname = 'renameFromClient' + '_alpine' + str(x+1) + '_' + fname
         f = open(fname, 'rb')
         img = f.read()
         sock.sendall(img)
