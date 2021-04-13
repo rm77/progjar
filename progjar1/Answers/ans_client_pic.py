@@ -27,7 +27,7 @@ for x in range(2):
         amount_expected = len(img)
         with sock, open(rname, 'wb') as file:
             while amount_received < amount_expected:
-                data = sock.recv(16)
+                data = sock.recv(2048)
                 amount_received += len(data)
                 if not data:
                     break
