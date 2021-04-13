@@ -16,12 +16,8 @@ for x in range(2):
 
     try:
         # Send data
-        # 1Mb = 1000kb
-        # 1Kb = 1000byte
-        # 1character = 1byte
-        # Conclusion : 2Mb = 2000000 Character
-        # Replace 150 to 2000000 (2Mb)
-        message = ''.join(random.choices(string.ascii_letters, k = 150))
+        # k = 2000000 for 2mb
+        message = ''.join(random.choices(string.ascii_letters, k = 2000000))
         print(f"sending {message}")
         sock.sendall(message.encode())
 
