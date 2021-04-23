@@ -11,5 +11,5 @@ while True:
     msg = " ini angka {} " . format(angka)
     print(msg)
     sock.sendto(msg.encode(), (TARGET_IP, TARGET_PORT))
-    #time.sleep(1)
+    time.sleep(1)
 
