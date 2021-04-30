@@ -10,7 +10,7 @@ def download_semua():
     texec = dict()
     urls = get_url_list()
     status_task = dict()
-    task_pool = Pool(processes=3) #2 task yang dapat dikerjakan secara simultan, dapat diset sesuai jumlah core
+    task_pool = Pool(processes=20) #2 task yang dapat dikerjakan secara simultan, dapat diset sesuai jumlah core
     catat_awal = datetime.datetime.now()
     for k in urls:
         print(f"mendownload {urls[k]}")

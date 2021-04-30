@@ -10,7 +10,7 @@ def download_semua():
     texec = dict()
     urls = get_url_list()
     status_task = dict()
-    task = concurrent.futures.ThreadPoolExecutor(max_workers=2)
+    task = concurrent.futures.ThreadPoolExecutor(max_workers=4)
     catat_awal = datetime.datetime.now()
     for k in urls:
         print(f"mendownload {urls[k]}")
