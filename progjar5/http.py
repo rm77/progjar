@@ -62,7 +62,18 @@ class HttpServer:
 			return self.response(400,'Bad Request','',{})
 	def http_get(self,object_address,headers):
 		files = glob('./*')
-		thedir='.'
+		print(files)
+		thedir='./'
+		if (object_address == '/'):
+			return self.response(200,'OK','Ini Adalah web Server percobaan',dict())
+
+		if (object_address == '/video'):
+			return self.response(302,'Found','',dict(location='https://youtu.be/katoxpnTf04'))
+		if (object_address == '/santai'):
+			return self.response(200,'OK','santai saja',dict())
+
+
+		object_address=object_address[1:]
 		if thedir+object_address not in files:
 			return self.response(404,'Not Found','',{})
 		fp = open(thedir+object_address,'rb') #rb => artinya adalah read dalam bentuk binary
@@ -89,10 +100,12 @@ if __name__=="__main__":
 	httpserver = HttpServer()
 	d = httpserver.proses('GET testing.txt HTTP/1.0')
 	print(d)
-	d = httpserver.http_get('testing2.txt')
+	d = httpserver.proses('GET donalbebek.jpg HTTP/1.0')
 	print(d)
-	d = httpserver.http_get('testing.txt')
-	print(d)
+	#d = httpserver.http_get('testing2.txt',{})
+	#print(d)
+#	d = httpserver.http_get('testing.txt')
+#	print(d)
 
 
 
