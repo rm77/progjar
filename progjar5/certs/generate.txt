@@ -1,0 +1,15 @@
+create private key and certificate
+ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout domain.key -out domain.crt
+
+-req: x509 CSR management (cert signing request)
+     x509-> public key infrastructure standard
+-x509: self signed certificate
+-nodes: for server usage
+-days: expire in 365 days
+-newkey:2048 generate new certificate and newkey, using RSA 2048 bit
+-keyout: key file result
+-out: cert file result
+
+
+
+
