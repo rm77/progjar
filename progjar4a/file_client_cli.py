@@ -1,19 +1,12 @@
-import sys
 import socket
 import json
+import base64
 import logging
-import xmltodict
 
-server_address = ('127.0.0.1', 12000)
+server_address=('0.0.0.0',7777)
 
-
-def getdatapemain(nomor=0):
-    cmd=f"getdatapemain {nomor}"
-    hasil = send_command(cmd)
-    return hasil
-
-
-def send_command(command_str):
+def send_command(command_str=""):
+    global server_address
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect(server_address)
     logging.warning(f"connecting to {server_address}")
@@ -43,8 +36,36 @@ def send_command(command_str):
         return False
 
 
+def remote_list():
+    command_str=f"LIST"
+    hasil = send_command(command_str)
+    if (hasil['status']=='OK'):
+        print("daftar file : ")
+        for nmfile in hasil['data']:
+            print(f"- {nmfile}")
+        return True
+    else:
+        print("Gagal")
+        return False
+
+def remote_get(filename=""):
+    command_str=f"GET {filename}"
+    hasil = send_command(command_str)
+    if (hasil['status']=='OK'):
+        #proses file dalam bentuk base64 ke bentuk bytes
+        namafile= hasil['data_namafile']
+        isifile = base64.b64decode(hasil['data_file'])
+        fp = open(namafile,'wb+')
+        fp.write(isifile)
+        fp.close()
+        return True
+    else:
+        print("Gagal")
+        return False
+
+
 if __name__=='__main__':
-    h = getdatapemain(1)
-    print(h['nama'],h['nomor'])
-    h = getdatapemain(2)
-    print(h['nama'],h['nomor'])
+    server_address=('0.0.0.0',6666)
+    remote_list()
+    #remote_get('donalbebek.jpg')
+
