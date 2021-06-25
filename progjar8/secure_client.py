@@ -22,6 +22,7 @@ def create_secure_socket(destination_address='localhost',port=10000):
     logging.warning(f"connecting to {server_address}")
     sock.connect(server_address)
     secure_socket = context.wrap_socket(sock,server_hostname=destination_address)
+    print(secure_socket.getpeercert())
     return secure_socket
 
 
