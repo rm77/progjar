@@ -8,7 +8,7 @@ services:
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
     volumes:
-      - ./work/mesin1:/home/jovyan/work
+      - ./work:/home/jovyan/work
       - ./script:/script
     command: "sh /script/run.sh"
     networks:
@@ -21,7 +21,7 @@ services:
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
     volumes:
-      - ./work/mesin1:/home/jovyan/work
+      - ./work:/home/jovyan/work
       - ./script:/script
     command: "sh /script/run.sh"
     networks:
@@ -34,7 +34,7 @@ services:
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
     volumes:
-      - ./work/mesin1:/home/jovyan/work
+      - ./work:/home/jovyan/work
       - ./script:/script
     command: "sh /script/run.sh"
     networks:
@@ -47,7 +47,7 @@ services:
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
     volumes:
-      - ./work/mesin1:/home/jovyan/work
+      - ./work:/home/jovyan/work
       - ./script:/script
     command: "sh /script/run.sh"
     networks:
