@@ -1,4 +1,4 @@
-#LAB PEMROGRAMAN JARINGAN
+# LAB PEMROGRAMAN JARINGAN
 
 Dalam MK pemrograman jaringan , disediakan 4 buah mesin dengan IP address sebagai berikut.
 mesin-mesin tersebut berupa docker container. tiap-tiap mesin dapat diakses dengan mengakses url melalui web browser
@@ -8,7 +8,7 @@ mesin-mesin tersebut berupa docker container. tiap-tiap mesin dapat diakses deng
 - mesin3 : 172.16.16.103 http://172.16.16.103:8888
 - mesin4 : 172.16.16.104 http://172.16.16.104:8888
 
-#LANGKAH-LANGKAH
+# LANGKAH-LANGKAH
 
 
 - install docker dan docker-compose
