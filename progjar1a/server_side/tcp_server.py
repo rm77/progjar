@@ -46,6 +46,7 @@ def run_server(server_address,is_secure=False):
     # ------------------------------ SECURE SOCKET INITIALIZATION ----
     if is_secure == True:
         cert_location = os.getcwd() + '/certs/'
+        print(cert_location)
         socket_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         socket_context.load_cert_chain(
             certfile=cert_location + 'domain.crt',
@@ -108,7 +109,7 @@ def run_server(server_address,is_secure=False):
 
 if __name__=='__main__':
     try:
-        run_server(('0.0.0.0', 12000))
+        run_server(('0.0.0.0', 12000),is_secure=True)
     except KeyboardInterrupt:
         logging.warning("Control-C: Program berhenti")
         exit(0)
