@@ -56,8 +56,8 @@ def run_proxy_server(proxy_address,realserver_address):
 
 if __name__=='__main__':
     try:
-        proxy_address = ('0.0.0.0',15000)
-        realserver_address = ('172.16.16.101',12000)
+        proxy_address = ('0.0.0.0',16000)
+        realserver_address = ('172.16.16.103',15000)
         run_proxy_server(proxy_address,realserver_address)
     except KeyboardInterrupt:
         logging.warning("Control-C: Program berhenti")

@@ -6,7 +6,7 @@ import xmltodict
 import ssl
 import os
 
-server_address = ('172.16.16.101', 12000)
+server_address = ('172.16.16.104', 16000)
 
 def make_socket(destination_address='localhost',port=12000):
     try:
@@ -36,7 +36,10 @@ def make_secure_socket(destination_address='localhost',port=10000):
     except Exception as ee:
         logging.warning(f"error {str(ee)}")
 
-
+def deserialisasi(s):
+    logging.warning(f"deserialisasi {s.strip()}")
+    return json.loads(s)
+    
 
 def send_command(command_str,is_secure=False):
     alamat_server = server_address[0]
@@ -67,7 +70,7 @@ def send_command(command_str,is_secure=False):
                 break
         # at this point, data_received (string) will contain all data coming from the socket
         # to be able to use the data_received as a dict, need to load it using json.loads()
-        hasil = json.loads(data_received)
+        hasil = deserialisasi(data_received)
         logging.warning("data received from server:")
         return hasil
     except Exception as ee:
@@ -92,20 +95,26 @@ if __name__=='__main__':
     h = lihatversi(is_secure=True)
     if (h):
         print(h)
-    
+
     h = getdatapemain(1,is_secure=True)
     if (h):
         print(h['nama'],h['nomor'])
     else:
         print("kegagalan pada data transfer")
 
-    h = getdatapemain(2,is_secure=False)
+    h = getdatapemain(2,is_secure=True)
     if (h):
         print(h['nama'],h['nomor'])
     else:
         print("kegagalan pada data transfer")
 
-    h = getdatapemain(3,is_secure=False)
+    h = getdatapemain(3,is_secure=True)
+    if (h):
+        print(h['nama'],h['nomor'])
+    else:
+        print("kegagalan pada data transfer")
+
+    h = getdatapemain(4,is_secure=True)
     if (h):
         print(h['nama'],h['nomor'])
     else:

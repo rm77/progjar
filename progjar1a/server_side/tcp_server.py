@@ -94,7 +94,7 @@ def run_server(server_address,is_secure=False):
                         selesai=True
 
                     if (selesai==True):
-                        hasil = proses_request(data.decode())
+                        hasil = proses_request(data_received)
                         logging.warning(f"hasil proses: {hasil}")
 
                         #hasil bisa berupa tipe dictionary
