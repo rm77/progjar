@@ -12,6 +12,9 @@ alldata['2']=dict(nomor=2, nama="luke shaw", posisi="bek kiri")
 alldata['3']=dict(nomor=3, nama="aaron wan-bissaka", posisi="bek kanan")
 alldata['4']=dict(nomor=4, nama="victor lindelof", posisi="bek tengah kanan")
 
+def versi():
+    return "versi 0.0.1"
+
 
 def proses_request(request_string):
     #format request
@@ -30,6 +33,8 @@ def proses_request(request_string):
                 hasil = alldata[nomorpemain]
             except:
                 hasil = None
+        elif (command == 'versi'):
+            hasil = versi()
     except:
         hasil = None
     return hasil
@@ -47,7 +52,7 @@ def run_server(server_address,is_secure=False):
     # ------------------------------ SECURE SOCKET INITIALIZATION ----
     if is_secure == True:
         print(os.getcwd())
-        cert_location = os.getcwd() + '/server_side/certs/'
+        cert_location = os.getcwd() + '/certs/'
         socket_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         socket_context.load_cert_chain(
             certfile=cert_location + 'domain.crt',
@@ -120,7 +125,7 @@ def run_server(server_address,is_secure=False):
 
 if __name__=='__main__':
     try:
-        run_server(('0.0.0.0', 12000),is_secure=False)
+        run_server(('0.0.0.0', 12000),is_secure=True)
     except KeyboardInterrupt:
         logging.warning("Control-C: Program berhenti")
         exit(0)

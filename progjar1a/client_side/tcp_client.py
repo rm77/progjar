@@ -6,7 +6,7 @@ import xmltodict
 import ssl
 import os
 
-server_address = ('127.0.0.1', 15000)
+server_address = ('172.16.16.101', 12000)
 
 def make_socket(destination_address='localhost',port=12000):
     try:
@@ -70,8 +70,8 @@ def send_command(command_str,is_secure=False):
         hasil = json.loads(data_received)
         logging.warning("data received from server:")
         return hasil
-    except:
-        logging.warning("error during data receiving")
+    except Exception as ee:
+        logging.warning(f"error during data receiving {str(ee)}")
         return False
 
 
@@ -81,8 +81,19 @@ def getdatapemain(nomor=0,is_secure=False):
     hasil = send_command(cmd,is_secure=is_secure)
     return hasil
 
+def lihatversi(is_secure=False):
+    cmd=f"versi \r\n\r\n"
+    hasil = send_command(cmd,is_secure=is_secure)
+    return hasil
+    
+
+
 if __name__=='__main__':
-    h = getdatapemain(1,is_secure=False)
+    h = lihatversi(is_secure=True)
+    if (h):
+        print(h)
+    
+    h = getdatapemain(1,is_secure=True)
     if (h):
         print(h['nama'],h['nomor'])
     else:
