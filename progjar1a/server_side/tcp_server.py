@@ -3,7 +3,8 @@ import socket
 import logging
 import json
 import dicttoxml
-import os,ssl
+import os
+import ssl
 
 alldata = dict()
 alldata['1']=dict(nomor=1, nama="dean henderson", posisi="kiper")
@@ -45,8 +46,8 @@ def serialisasi(a):
 def run_server(server_address,is_secure=False):
     # ------------------------------ SECURE SOCKET INITIALIZATION ----
     if is_secure == True:
-        cert_location = os.getcwd() + '/certs/'
-        print(cert_location)
+        print(os.getcwd())
+        cert_location = os.getcwd() + '/server_side/certs/'
         socket_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         socket_context.load_cert_chain(
             certfile=cert_location + 'domain.crt',
@@ -61,7 +62,7 @@ def run_server(server_address,is_secure=False):
     logging.warning(f"starting up on {server_address}")
     sock.bind(server_address)
     # Listen for incoming connections
-    sock.listen(1)
+    sock.listen(1000)
 
 
     while True:
@@ -77,39 +78,49 @@ def run_server(server_address,is_secure=False):
             else:
                 connection = koneksi
 
+            selesai=False
+            data_received="" #string
             while True:
                 data = connection.recv(32)
                 logging.warning(f"received {data}")
                 if data:
-                    hasil = proses_request(data.decode())
-                    logging.warning(f"hasil proses: {hasil}")
+                    data_received += data.decode()
+                    if "\r\n\r\n" in data_received:
+                        selesai=True
 
-                    #hasil bisa berupa tipe dictionary
-                    #harus diserialisasi dulu sebelum dikirim via network
-                    # Send data
-                    # some data structure may have complex structure
-                    # how to send such data structure through the network ?
-                    # use serialization
-                    #  example : json, xml
+                    if (selesai==True):
+                        hasil = proses_request(data.decode())
+                        logging.warning(f"hasil proses: {hasil}")
 
-                    # complex structure, nested dict
-                    # all data that will be sent through network has to be encoded into bytes type"
-                    # in this case, the message (type: string) will be encoded to bytes by calling encode
+                        #hasil bisa berupa tipe dictionary
+                        #harus diserialisasi dulu sebelum dikirim via network
+                        # Send data
+                        # some data structure may have complex structure
+                        # how to send such data structure through the network ?
+                        # use serialization
+                        #  example : json, xml
 
-                    hasil = serialisasi(hasil)
-                    hasil += "\r\n\r\n"
-                    connection.sendall(hasil.encode())
+                        # complex structure, nested dict
+                        # all data that will be sent through network has to be encoded into bytes type"
+                        # in this case, the message (type: string) will be encoded to bytes by calling encode
+
+                        hasil = serialisasi(hasil)
+                        hasil += "\r\n\r\n"
+                        connection.sendall(hasil.encode())
+                        selesai = False
+                        data_received = ""  # string
+                        break
+
                 else:
-                   print(f"no more data from {client_address}")
+                   logging.warning(f"no more data from {client_address}")
                    break
             # Clean up the connection
-            connection.close()
         except ssl.SSLError as error_ssl:
             logging.warning(f"SSL error: {str(error_ssl)}")
 
 if __name__=='__main__':
     try:
-        run_server(('0.0.0.0', 12000),is_secure=True)
+        run_server(('0.0.0.0', 12000),is_secure=False)
     except KeyboardInterrupt:
         logging.warning("Control-C: Program berhenti")
         exit(0)

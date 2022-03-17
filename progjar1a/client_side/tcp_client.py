@@ -6,29 +6,36 @@ import xmltodict
 import ssl
 import os
 
-server_address = ('127.0.0.1', 12000)
+server_address = ('127.0.0.1', 15000)
 
 def make_socket(destination_address='localhost',port=12000):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_address = (destination_address, port)
-    logging.warning(f"connecting to {server_address}")
-    sock.connect(server_address)
-    return sock
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server_address = (destination_address, port)
+        logging.warning(f"connecting to {server_address}")
+        sock.connect(server_address)
+        return sock
+    except Exception as ee:
+        logging.warning(f"error {str(ee)}")
 
 def make_secure_socket(destination_address='localhost',port=10000):
-    #get it from https://curl.se/docs/caextract.html
+    try:
+        #get it from https://curl.se/docs/caextract.html
 
-    context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-    context.verify_mode=ssl.CERT_OPTIONAL
-    context.load_verify_locations(os.getcwd() + '/domain.crt')
+        context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+        context.verify_mode=ssl.CERT_OPTIONAL
+        context.load_verify_locations(os.getcwd() + '/domain.crt')
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_address = (destination_address, port)
-    logging.warning(f"connecting to {server_address}")
-    sock.connect(server_address)
-    secure_socket = context.wrap_socket(sock,server_hostname=destination_address)
-    logging.warning(secure_socket.getpeercert())
-    return secure_socket
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server_address = (destination_address, port)
+        logging.warning(f"connecting to {server_address}")
+        sock.connect(server_address)
+        secure_socket = context.wrap_socket(sock,server_hostname=destination_address)
+        logging.warning(secure_socket.getpeercert())
+        return secure_socket
+    except Exception as ee:
+        logging.warning(f"error {str(ee)}")
+
 
 
 def send_command(command_str,is_secure=False):
@@ -69,13 +76,26 @@ def send_command(command_str,is_secure=False):
 
 
 
-def getdatapemain(nomor=0):
-    cmd=f"getdatapemain {nomor}"
-    hasil = send_command(cmd)
+def getdatapemain(nomor=0,is_secure=False):
+    cmd=f"getdatapemain {nomor}\r\n\r\n"
+    hasil = send_command(cmd,is_secure=is_secure)
     return hasil
 
 if __name__=='__main__':
-    h = getdatapemain(1)
-    print(h['nama'],h['nomor'])
-    h = getdatapemain(2)
-    print(h['nama'],h['nomor'])
+    h = getdatapemain(1,is_secure=False)
+    if (h):
+        print(h['nama'],h['nomor'])
+    else:
+        print("kegagalan pada data transfer")
+
+    h = getdatapemain(2,is_secure=False)
+    if (h):
+        print(h['nama'],h['nomor'])
+    else:
+        print("kegagalan pada data transfer")
+
+    h = getdatapemain(3,is_secure=False)
+    if (h):
+        print(h['nama'],h['nomor'])
+    else:
+        print("kegagalan pada data transfer")
