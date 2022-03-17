@@ -4,10 +4,14 @@ import logging
 from threading import Thread
 
 def make_realserver_socket(server_address):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    logging.warning(f"connecting to {server_address}")
-    sock.connect(server_address)
-    return sock
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        logging.warning(f"connecting to {server_address}")
+        sock.connect(server_address)
+        return sock
+    except Exception as ee:
+        logging.warning(f"error {str(ee)}")
+
 
 def from_client_torealserver(realserver_connection,client_connection):
     while True:
