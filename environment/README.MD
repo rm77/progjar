@@ -1,4 +1,4 @@
-# LAB PEMROGRAMAN JARINGAN
+# LAB PEMROGRAMAN JARINGAN ITS
 
 Dalam MK pemrograman jaringan , disediakan 4 buah mesin dengan IP address sebagai berikut.
 mesin-mesin tersebut berupa docker container. tiap-tiap mesin dapat diakses dengan mengakses url melalui web browser
