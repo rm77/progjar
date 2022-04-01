@@ -103,11 +103,15 @@ def run_server(server_address,is_secure=False):
             else:
                 connection = koneksi
 
+            texec[texec_index] = threading.Thread(target=send_receive_data, args=(client_address, connection))
+            texec[texec_index].start()
+            texec_index +=1
+
             # Clean up the connection
         except ssl.SSLError as error_ssl:
             logging.warning(f"SSL error: {str(error_ssl)}")
     
-def send_receive_data(client_addres, connection):
+def send_receive_data(client_address, connection):
     selesai=False
     data_received="" #string
     while True:
