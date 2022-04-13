@@ -1,0 +1,52 @@
+
+
+CAP LS 302
+:barjavel.freenode.net NOTICE * :*** Looking up your hostname...
+NICK zeektest
+USER zeektest 0 * :realname
+:barjavel.freenode.net NOTICE * :*** Checking Ident
+:barjavel.freenode.net NOTICE * :*** Found your hostname
+:barjavel.freenode.net NOTICE * :*** No Ident response
+:barjavel.freenode.net CAP * LS :account-notify away-notify cap-notify chghost extended-join identify-msg multi-prefix sasl tls
+CAP REQ :account-notify away-notify cap-notify chghost extended-join identify-msg multi-prefix
+:barjavel.freenode.net CAP zeektest ACK :account-notify away-notify cap-notify chghost extended-join identify-msg multi-prefix 
+CAP END
+:barjavel.freenode.net 001 zeektest :Welcome to the freenode Internet Relay Chat Network zeektest
+:barjavel.freenode.net 002 zeektest :Your host is barjavel.freenode.net[195.154.200.232/6667], running version ircd-seven-1.1.9
+:barjavel.freenode.net 003 zeektest :This server was created Thu Dec 19 2019 at 20:10:02 UTC
+:barjavel.freenode.net 004 zeektest barjavel.freenode.net ircd-seven-1.1.9 DOQRSZaghilopsuwz CFILMPQSbcefgijklmnopqrstuvz bkloveqjfI
+:barjavel.freenode.net 005 zeektest CHANTYPES=# EXCEPTS INVEX CHANMODES=eIbq,k,flj,CFLMPQScgimnprstuz CHANLIMIT=#:120 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=freenode STATUSMSG=@+ CALLERID=g CASEMAPPING=rfc1459 :are supported by this server
+:barjavel.freenode.net 005 zeektest CHARSET=ascii NICKLEN=16 CHANNELLEN=50 TOPICLEN=390 DEAF=D FNC TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,ajrxz CLIENTVER=3.0 WHOX KNOCK CPRIVMSG :are supported by this server
+:barjavel.freenode.net 005 zeektest CNOTICE ETRACE SAFELIST ELIST=CTU MONITOR=100 :are supported by this server
+:barjavel.freenode.net 251 zeektest :There are 101 users and 82081 invisible on 31 servers
+:barjavel.freenode.net 252 zeektest 43 :IRC Operators online
+:barjavel.freenode.net 253 zeektest 45 :unknown connection(s)
+:barjavel.freenode.net 254 zeektest 41982 :channels formed
+:barjavel.freenode.net 255 zeektest :I have 3809 clients and 1 servers
+:barjavel.freenode.net 265 zeektest 3809 5891 :Current local users 3809, max 5891
+:barjavel.freenode.net 266 zeektest 82182 90930 :Current global users 82182, max 90930
+:barjavel.freenode.net 250 zeektest :Highest connection count: 5892 (5891 clients) (1543159 connections received)
+:barjavel.freenode.net 375 zeektest :- barjavel.freenode.net Message of the Day -
+:barjavel.freenode.net 372 zeektest :- Welcome to barjavel.freenode.net in Paris, FR, EU.
+...edited…
+:barjavel.freenode.net 372 zeektest :- Thank you for using freenode!
+:barjavel.freenode.net 376 zeektest :End of /MOTD command.
+:zeektest MODE zeektest :+i
+JOIN #freenode
+:zeektest!~zeektest@pool-XX-XXX-XXX-XX.washdc.fios.verizon.net JOIN #freenode * :realname
+:barjavel.freenode.net 332 zeektest #freenode :Welcome to #freenode | Don't copy/paste spam | No politics. | Feel free to message staff at any time. You can find us using /stats p (shows immediately-available staff) or /who freenode/staff/* (shows all staff)
+:barjavel.freenode.net 333 zeektest #freenode deadk 1604191950
+...edited…
+:ChanServ!ChanServ@services. NOTICE zeektest :+[#freenode] Please read the topic.
+:services. 328 zeektest #freenode :https://freenode.net/
+WHO #freenode %chtsunfra,152
+:barjavel.freenode.net 324 zeektest #freenode +CLPcntjf 5:10 #freenode-overflow
+...edited…
+PING LAG641756037
+:barjavel.freenode.net PONG barjavel.freenode.net :LAG641756037
+:willcl_ark!~quassel@cpc123780-trow7-2-0-cust177.18-1.cable.virginm.net AWAY :Away
+:EGH!~EGH@79.142.76.202 JOIN #freenode EGH :Erik
+PRIVMSG #freenode :One more test... thanks everyone.
+QUIT :Leaving
+:zeektest!~zeektest@pool-XX-XXX-XXX-XX.washdc.fios.verizon.net QUIT :Client Quit
+ERROR :Closing Link: pool-XX-XXX-XXX-XX.washdc.fios.verizon.net (Client Quit)
