@@ -10,7 +10,7 @@ def make_socket(destination_address='localhost',port=12000):
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server_address = (destination_address, port)
-        logging.warning(f"connecting to {server_address}")
+        #logging.warning(f"connecting to {server_address}")
         sock.connect(server_address)
         return sock
     except Exception as ee:

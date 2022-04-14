@@ -34,7 +34,7 @@ GET
 - BERHASIL:
   - status: OK
   - data_namafile : nama file yang diminta
-  - data_file : isi file yang diminta
+  - data_file : isi file yang diminta (dalam bentuk base64)
 - GAGAL:
   - status: ERROR
   - data: pesan kesalahan

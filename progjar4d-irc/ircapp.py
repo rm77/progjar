@@ -4,9 +4,10 @@ from curses.textpad import Textbox, rectangle
 import threading
 import shlex
 from library import *
+import random
 
 class MyIRCClient(threading.Thread):
-    def __init__(self,ircserver='irc.dal.net',ircport=6667):
+    def __init__(self,ircserver='irc.undernet.org',ircport=6669):
         self.ircserver = ircserver
         self.ircport = ircport
         self.sock = None
@@ -19,7 +20,7 @@ class MyIRCClient(threading.Thread):
     def auth(self,params):
         username = params[0]
         realname=params[1]
-        kirim = f"NICK {username}\nUSER {username} 0 * :{realname}\n"
+        kirim = f"\nNICK {username}\n\nUSER {username} * * {realname}\n"
         self.win.addstr(kirim)
         self.sock.sendall(kirim.encode())
     def join(self,params):
@@ -33,19 +34,24 @@ class MyIRCClient(threading.Thread):
         kirim = f"PRIVMSG {tujuan} :{message} \n"
         self.win.addstr(kirim)
         self.sock.sendall(kirim.encode())
-
-
+    def ping(self,params):
+        kirim = f"PING {random.randint(10000,12000)} \n"       
+        self.win.addstr(kirim)
+        self.sock.sendall(kirim.encode())
     def stopit(self):
         self.jalan = False
     def run(self):
         data_received = ""
+        baris = []
         while self.jalan == True:
-            data = self.sock.recv(16)
+            data = self.sock.recv(32)
             if data:
                 # data is not empty, concat with previous content
                 data_received += data.decode()
-                logging.warning(data_received)
-                self.win.addstr(data_received)
+                #logging.warning(data_received)
+            for g in data_received.splitlines():
+                self.win.addstr(f"{g}\n")
+            self.win.refresh()
 
 
 class MyInputProcessor:
@@ -82,9 +88,11 @@ class MyUI(threading.Thread):
         stdscr.refresh()
         stdscr.border(0)
         height, width = stdscr.getmaxyx()
-        boxwin = curses.newwin(height-3,60,0,0)
+        boxwin = curses.newwin(height,width)
         boxwin.scrollok(True)
         stdscr.addstr(height-2, 0, "Masukkan perintah")
+        boxwin.refresh()
+        #boxwin.box()
         self.irc_client = MyIRCClient()
         self.irc_client.setwin(boxwin)
         self.input_processor = MyInputProcessor(self.irc_client)
@@ -93,7 +101,8 @@ class MyUI(threading.Thread):
         while True:
             #stdscr.clear()
             s = stdscr.getstr(height-1,0,90)
-            stdscr.addstr(height-1,0,s)
+            boxwin.addstr(f"[C]---> {s.decode()}\n")
+            boxwin.refresh()
             if s.decode()=="quit":
                 curses.endwin()
                 self.irc_client.stopit()
@@ -103,7 +112,7 @@ class MyUI(threading.Thread):
             if (type(result) is str):
                 if result.startswith("ERROR"):
                     stdscr.addstr(height-2,0,result)
-            boxwin.refresh()
+            #boxwin.refresh()
             stdscr.refresh()
 
 if __name__=='__main__':
