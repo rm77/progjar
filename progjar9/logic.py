@@ -9,6 +9,8 @@ class PlayerServerInterface:
     def __init__(self):
         self.players = shelve.open('g.db',writeback=True)
         self.players['1']= "100,100"
+        self.players['2']= "100,100"
+        self.players['3']= "100,100"
 
     def set_location(self,params=[]):
         pnum = params[0]
