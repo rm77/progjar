@@ -1,0 +1,13 @@
+Foo DEFINITIONS ::= BEGIN
+
+    Question ::= SEQUENCE {
+        id        INTEGER,
+        question  IA5String
+    }
+
+    Answer ::= SEQUENCE {
+        id        INTEGER,
+        answer    BOOLEAN
+    }
+
+END

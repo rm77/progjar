@@ -4,6 +4,7 @@ import shelve
 import yaml
 import dicttoxml
 import xmltodict
+import asn1tools
 
 from dataclasses import dataclass, asdict
 
@@ -76,6 +77,26 @@ def serialize_from_yaml():
     print(hasil)
 
 
+def serialize_to_asn():
+    test = asn1tools.compile_files('test.asn')
+    encoded = test.encode('Question', {'id': 1, 'question': 'Is 1+1=3?'})
+    fp = open('test.ber','wb')
+    fp.write(encoded)
+    fp.close()
+
+def serialize_from_asn():
+    test = asn1tools.compile_files('test.asn')
+    fp = open('test.ber','rb')
+    decoded = test.decode('Question',fp.read())
+    fp.close()
+    print(decoded)
+
+
+
+
+
+
+
 if __name__=='__main__':
     serialize_to_csv()
     deserialize_from_csv()
@@ -91,3 +112,6 @@ if __name__=='__main__':
 
     serialize_to_yaml()
     serialize_from_yaml()
+
+    serialize_to_asn()
+    serialize_from_asn()

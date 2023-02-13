@@ -1,3 +1,4 @@
 dicttoxml
 xmltodict
 pyyaml
+asn1tools
