@@ -41,6 +41,22 @@ untuk menjalankan gunakan command
 ```
 python3 <namaprogram.py>
 ```
+--
+*UNTUK MAC*
+
+untuk macos, gunakan 
+docker-compose -f docker-compose-mac.yml up -d
+
+
+setiap mesin akan dijalankan di port yang berbeda
+
+progjar-mesin1 di [IP]:60001
+progjar-mesin2 di [IP]:60002
+progjar-mesin3 di [IP]:60003
+progjar-mesin4 di [IP]:60004
+
+
+sedangkan [IP] merupakan IP address dari komputer yang dipakai
 
 --
 
