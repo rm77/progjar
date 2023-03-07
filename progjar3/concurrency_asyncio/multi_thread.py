@@ -11,7 +11,7 @@ async def download_semua():
     texec = dict()
     urls = await get_url_list()
 
-    catat_awal = datetime.datetime.now()
+    catat_awal = time.perf_counter()
     for k in urls:
         print(f"mendownload {urls[k]}")
         waktu = time.time()
@@ -19,8 +19,8 @@ async def download_semua():
         texec[k] = await download_gambar(urls[k]) #tanpa await, tidak akan melakukan apa apa
 
 
-    catat_akhir = datetime.datetime.now()
-    selesai = catat_akhir - catat_awal
+    catat_akhir = time.perf_counter()
+    selesai = round(catat_akhir - catat_awal,2)
     print(f"Waktu TOTAL yang dibutuhkan {selesai} detik {catat_awal} s/d {catat_akhir}")
 
 

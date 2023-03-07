@@ -1,6 +1,5 @@
 import logging
 import asyncio
-import gevent
 import os
 import time
 import datetime
