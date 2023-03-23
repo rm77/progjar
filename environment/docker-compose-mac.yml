@@ -6,6 +6,7 @@ services:
     user: root
     ports:
       - "60001:8888"
+      - "20001:20000"
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
       - "GRANT_SUDO=yes"
@@ -19,6 +20,7 @@ services:
     user: root
     ports:
       - "60002:8888"
+      - "20002:20000"
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
       - "GRANT_SUDO=yes"
@@ -32,6 +34,7 @@ services:
     user: root
     ports:
       - "60003:8888"
+      - "20003:20000"
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
       - "GRANT_SUDO=yes"
@@ -45,6 +48,7 @@ services:
     user: root
     ports:
       - "60004:8888"
+      - "20004:20000"
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
       - "GRANT_SUDO=yes"
