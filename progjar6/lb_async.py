@@ -8,9 +8,9 @@ import logging
 class BackendList:
 	def __init__(self):
 		self.servers=[]
-		self.servers.append(('127.0.0.1',8889))
 		self.servers.append(('127.0.0.1',8000))
 		self.servers.append(('127.0.0.1',8001))
+		self.servers.append(('127.0.0.1',8002))
 #		self.servers.append(('127.0.0.1',9005))
 		self.current=0
 	def getserver(self):
@@ -77,7 +77,7 @@ class Server(asyncore.dispatcher):
 
 
 def main():
-	portnumber=44444
+	portnumber=55555
 	try:
 		portnumber=int(sys.argv[1])
 	except:
