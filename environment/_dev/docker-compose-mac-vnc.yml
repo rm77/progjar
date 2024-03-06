@@ -2,7 +2,7 @@ version: '2'
 services:
   mesin1:
     container_name: progjar-mesin-1
-    image: royyana/progjar-jupyter
+    image: jupyter/scipy-notebook
     user: root
     ports:
       - "60001:8888"
@@ -10,9 +10,10 @@ services:
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
       - "GRANT_SUDO=yes"
-      - "PASSWORD=''"
     volumes:
       - ./work:/home/jovyan/work
+      - ./script:/script
+    command: "sh /script/run.sh"
     networks:
       outside:
         priority: 1
@@ -21,7 +22,7 @@ services:
         ipv4_address: "172.16.16.101"
   mesin2:
     container_name: progjar-mesin-2
-    image: royyana/progjar-jupyter
+    image: jupyter/scipy-notebook
     user: root
     ports:
       - "60002:8888"
@@ -29,9 +30,10 @@ services:
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
       - "GRANT_SUDO=yes"
-      - "PASSWORD=''"
     volumes:
       - ./work:/home/jovyan/work
+      - ./script:/script
+    command: "sh /script/run.sh"
     networks:
       outside:
         priority: 1
@@ -40,7 +42,7 @@ services:
         ipv4_address: "172.16.16.102"
   mesin3:
     container_name: progjar-mesin-3
-    image: royyana/progjar-jupyter
+    image: jupyter/scipy-notebook
     user: root
     ports:
       - "60003:8888"
@@ -48,9 +50,10 @@ services:
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
       - "GRANT_SUDO=yes"
-      - "PASSWORD=''"
     volumes:
       - ./work:/home/jovyan/work
+      - ./script:/script
+    command: "sh /script/run.sh"
     networks:
       outside:
         priority: 1
@@ -59,7 +62,7 @@ services:
         ipv4_address: "172.16.16.103"
   mesin4:
     container_name: progjar-mesin-4
-    image: royyana/progjar-jupyter
+    image: jupyter/scipy-notebook
     user: root
     ports:
       - "60004:8888"
@@ -67,9 +70,10 @@ services:
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
       - "GRANT_SUDO=yes"
-      - "PASSWORD=''"
     volumes:
       - ./work:/home/jovyan/work
+      - ./script:/script
+    command: "sh /script/run.sh"
     networks:
       outside:
         priority: 1
