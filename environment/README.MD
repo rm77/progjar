@@ -2,23 +2,26 @@
 
 Dalam MK pemrograman jaringan , disediakan 3 buah mesin dengan URL  sebagai berikut.
 mesin-mesin tersebut berupa docker container. tiap-tiap mesin dapat diakses dengan mengakses url melalui web browser
+mesin tersebut berupa, jupyter-lab yang didalamnya terdapat utility wireshark
+
+untuk mengakses mesin jupyter
 
 - mesin1 : http://<IPaddress>:60001
 - mesin2 : http://<IPaddress>:60002
 - mesin3 : http://<IPaddress>:60003
 
-dan 1 mesin lagi berupa linux desktop untuk menjalankan wireshark
-- mesin4 : http://<IPaddress>:60004, dengan password "progjar666"
+sedangkan untuk mengakses wireshark
+
+- mesin1 : http://<IPaddress>:50001
+- mesin2 : http://<IPaddress>:50002
+- mesin3 : http://<IPaddress>:50003
 
 
-untuk mengakses halaman web jupyter, gunakan password
-- pada mesin1 (port 60001), gunakan password "mesin1"
-- pada mesin2 (port 60002), gunakan password "mesin2"
-- pada mesin3 (port 60003), gunakan password "mesin3"
+untuk mengakses halaman web jupyter ataupun wireshark (dengan vnc) , gunakan password
+- pada mesin1, gunakan password "mesin1"
+- pada mesin2, gunakan password "mesin2"
+- pada mesin3, gunakan password "mesin3"
 
-di lingkungan internal antar mesin (diakses dari dalam jupyter/vnc), terdapat 2 buah interface 
-- eth0 (terhubung ke interface luar)
-- eth1 (terhubung ke interface antar mesin)
 
 untuk lingkungan internal, masing masing mesin mempunyai IP address sebagai berikut:
 - mesin1 : 172.16.16.101
@@ -35,12 +38,11 @@ untuk lingkungan internal, masing masing mesin mempunyai IP address sebagai beri
 
 ```
 $ docker-compose ps
-     Name                    Command                       State                                                    Ports                                          
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-progjar-mesin-1   /bin/sh /tmp/runme.sh            Up (health: starting)   0.0.0.0:20001->20000/tcp,:::20001->20000/tcp, 0.0.0.0:60001->8888/tcp,:::60001->8888/tcp
-progjar-mesin-2   /bin/sh /tmp/runme.sh            Up (health: starting)   0.0.0.0:20002->20000/tcp,:::20002->20000/tcp, 0.0.0.0:60002->8888/tcp,:::60002->8888/tcp
-progjar-mesin-3   /bin/sh /tmp/runme.sh            Up (healthy)            0.0.0.0:20003->20000/tcp,:::20003->20000/tcp, 0.0.0.0:60003->8888/tcp,:::60003->8888/tcp
-progjar-vnc       sh -C /super/run-entrypoint.sh   Up                      5900/tcp, 0.0.0.0:60004->6666/tcp,:::60004->6666/tcp                                    
+     Name                Command             State                                               Ports                                         
+-----------------------------------------------------------------------------------------------------------------------------------------------
+progjar-mesin-1   /bin/sh /tmp/runme.sh   Up (healthy)   0.0.0.0:50001->6666/tcp,:::50001->6666/tcp, 0.0.0.0:60001->8888/tcp,:::60001->8888/tcp
+progjar-mesin-2   /bin/sh /tmp/runme.sh   Up (healthy)   0.0.0.0:50002->6666/tcp,:::50002->6666/tcp, 0.0.0.0:60002->8888/tcp,:::60002->8888/tcp
+progjar-mesin-3   /bin/sh /tmp/runme.sh   Up (healthy)   0.0.0.0:50003->6666/tcp,:::50003->6666/tcp, 0.0.0.0:60003->8888/tcp,:::60003->8888/tcp
 
 ```
 
