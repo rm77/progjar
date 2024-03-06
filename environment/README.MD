@@ -5,12 +5,13 @@ mesin-mesin tersebut berupa docker container. tiap-tiap mesin dapat diakses deng
 mesin tersebut berupa, jupyter-lab yang didalamnya terdapat utility wireshark
 
 #### PERHATIAN
+```
 konfigurasi mesin-mesin dalam lab pemrograman jaringan ini dibuat dan telah dicoba dengan baik menggunakan sistem operasi linux
 untuk sistem operasi yang lain seperti MACOS bisa jadi tidak berfungsi, untuk memastikan, gunakan WSL (windows subsystem for linux) atau install Virtual Machine dengan HyperV atau virtualbox
 (dikarenakan masalah ketidakpastian lisensi, Virtualbox telah diblok dan tidak bisa didownload dalam jaringan ITS, gunakan jaringan internet diluar kampus untuk mendownload Virtualbox)
+```
 
-
-untuk mengakses mesin jupyter
+untuk mengakses mesin dengan web based jupyter lab
 
 - mesin1 : http://[IPaddress]:60001
 - mesin2 : http://[IPaddress]:60002
