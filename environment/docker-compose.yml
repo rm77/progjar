@@ -2,104 +2,77 @@ version: '2'
 services:
   mesin1:
     container_name: progjar-mesin-1
-    image: royyana/progjar-jupyter
+    image: royyana/progjar-jupyter:latest
     user: root
-    ports:
-      - "60001:8888"
-      - "20001:20000"
-    environment:
-      - "DOCKER_STACKS_JUPYTER_CMD=lab"
-      - "GRANT_SUDO=yes"
-      - "PASSWORD=''"
-    volumes:
-      - ./work:/home/jovyan/work
-    networks:
-      outside:
-        priority: 1
-      progjar-network:
-        priority: 2
-        ipv4_address: "172.16.16.101"
-  mesin2:
-    container_name: progjar-mesin-2
-    image: royyana/progjar-jupyter
-    user: root
-    ports:
-      - "60002:8888"
-      - "20002:20000"
-    environment:
-      - "DOCKER_STACKS_JUPYTER_CMD=lab"
-      - "GRANT_SUDO=yes"
-      - "PASSWORD=''"
-    volumes:
-      - ./work:/home/jovyan/work
-    networks:
-      outside:
-        priority: 1
-      progjar-network:
-        priority: 2
-        ipv4_address: "172.16.16.102"
-  mesin3:
-    container_name: progjar-mesin-3
-    image: royyana/progjar-jupyter
-    user: root
-    ports:
-      - "60003:8888"
-      - "20003:20000"
-    environment:
-      - "DOCKER_STACKS_JUPYTER_CMD=lab"
-      - "GRANT_SUDO=yes"
-      - "PASSWORD=''"
-    volumes:
-      - ./work:/home/jovyan/work
-    networks:
-      outside:
-        priority: 1
-      progjar-network:
-        priority: 2
-        ipv4_address: "172.16.16.103"
-  mesin4:
-    container_name: progjar-mesin-4
-    image: royyana/progjar-jupyter
-    user: root
-    ports:
-      - "60004:8888"
-      - "20004:20000"
-    environment:
-      - "DOCKER_STACKS_JUPYTER_CMD=lab"
-      - "GRANT_SUDO=yes"
-      - "PASSWORD=''"
-    volumes:
-      - ./work:/home/jovyan/work
-    networks:
-      outside:
-        priority: 1
-      progjar-network:
-        priority: 2
-        ipv4_address: "172.16.16.104"
-  mesin5:
-    container_name: progjar-vnc
-    user: root
-    image: royyana/rm-vnc:latest
     privileged: true
     cap_add:
     - NET_RAW
     - ALL
     - NET_ADMIN
     ports:
-      - "60005:6666"
+      - "60001:8888"
+      - "50001:6666"
     environment:
-      - "VNCPASSWORD=progjar666"
+      - "DOCKER_STACKS_JUPYTER_CMD=lab"
+      - "GRANT_SUDO=yes"
+      - "PASSWORD=mesin1"
+    volumes:
+      - ./work:/home/jovyan/work
     networks:
-      outside:
-        priority: 1
       progjar-network:
         priority: 2
-        ipv4_address: "172.16.16.105"
+        ipv4_address: "172.16.16.101"
+  mesin2:
+    container_name: progjar-mesin-2
+    image: royyana/progjar-jupyter:latest
+    user: root
+    privileged: true
+    cap_add:
+    - NET_RAW
+    - ALL
+    - NET_ADMIN
+    ports:
+      - "60002:8888"
+      - "50002:6666"
+    environment:
+      - "DOCKER_STACKS_JUPYTER_CMD=lab"
+      - "GRANT_SUDO=yes"
+      - "PASSWORD=mesin2"
+    volumes:
+      - ./work:/home/jovyan/work
+    networks:
+      progjar-network:
+        priority: 2
+        ipv4_address: "172.16.16.102"
+  mesin3:
+    container_name: progjar-mesin-3
+    image: royyana/progjar-jupyter:latest
+    user: root
+    privileged: true
+    cap_add:
+    - NET_RAW
+    - ALL
+    - NET_ADMIN
+    ports:
+      - "60003:8888"
+      - "50003:6666"
+    environment:
+      - "DOCKER_STACKS_JUPYTER_CMD=lab"
+      - "GRANT_SUDO=yes"
+      - "PASSWORD=mesin3"
+    volumes:
+      - ./work:/home/jovyan/work
+    networks:
+      progjar-network:
+        priority: 2
+        ipv4_address: "172.16.16.103"
 networks:
-  outside:
-    driver: bridge
   progjar-network:
-    driver: bridge 
+    name: progjar-network
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_icc: "true"
+      com.docker.network.bridge.name: "progjar-network"  
     ipam:
       driver: default
       config:
