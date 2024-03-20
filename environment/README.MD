@@ -37,6 +37,10 @@ untuk lingkungan internal, masing masing mesin mempunyai IP address sebagai beri
 - mesin4 : 172.16.16.104
 
 
+masing-masing mesin mempunyai 2 interface yaitu
+- eth0 -> menghubungkan dengan dunia luar
+- eth1 -> mennghubungkan antar mesin (isolated)
+
 # LANGKAH-LANGKAH
 
 - install docker dan docker-compose

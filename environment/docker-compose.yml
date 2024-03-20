@@ -16,9 +16,12 @@ services:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
       - "GRANT_SUDO=yes"
       - "PASSWORD=mesin1"
+    working_dir: /home/jovyan/work
     volumes:
       - ./work1:/home/jovyan/work
     networks:
+      default:
+        priority: 1
       progjar-network:
         priority: 2
         ipv4_address: "172.16.16.101"
@@ -38,9 +41,12 @@ services:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
       - "GRANT_SUDO=yes"
       - "PASSWORD=mesin2"
+    working_dir: /home/jovyan/work
     volumes:
       - ./work2:/home/jovyan/work
     networks:
+      default:
+        priority: 1
       progjar-network:
         priority: 2
         ipv4_address: "172.16.16.102"
@@ -60,13 +66,18 @@ services:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
       - "GRANT_SUDO=yes"
       - "PASSWORD=mesin3"
+    working_dir: /home/jovyan/work
     volumes:
       - ./work3:/home/jovyan/work
     networks:
+      default:
+        priority: 1
       progjar-network:
         priority: 2
         ipv4_address: "172.16.16.103"
 networks:
+  default:
+    driver: bridge
   progjar-network:
     name: progjar-network
     driver: bridge
