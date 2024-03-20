@@ -17,7 +17,7 @@ services:
       - "GRANT_SUDO=yes"
       - "PASSWORD=mesin1"
     volumes:
-      - ./work:/home/jovyan/work
+      - ./work1:/home/jovyan/work
     networks:
       progjar-network:
         priority: 2
@@ -39,7 +39,7 @@ services:
       - "GRANT_SUDO=yes"
       - "PASSWORD=mesin2"
     volumes:
-      - ./work:/home/jovyan/work
+      - ./work2:/home/jovyan/work
     networks:
       progjar-network:
         priority: 2
@@ -61,7 +61,7 @@ services:
       - "GRANT_SUDO=yes"
       - "PASSWORD=mesin3"
     volumes:
-      - ./work:/home/jovyan/work
+      - ./work3:/home/jovyan/work
     networks:
       progjar-network:
         priority: 2
