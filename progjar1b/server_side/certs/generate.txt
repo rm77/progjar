@@ -11,5 +11,8 @@ create private key and certificate
 -out: cert file result
 
 
+#cek domain.crt
+openssl x509 -in domain.crt -text -noout
+
 
 
