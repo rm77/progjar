@@ -6,7 +6,7 @@ import xmltodict
 import ssl
 import os
 
-server_address = ('172.16.16.104', 16000)
+server_address = ('localhost', 12000)
 
 def make_socket(destination_address='localhost',port=12000):
     try:
@@ -22,8 +22,9 @@ def make_secure_socket(destination_address='localhost',port=10000):
     try:
         #get it from https://curl.se/docs/caextract.html
 
-        context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-        context.verify_mode=ssl.CERT_OPTIONAL
+        context = ssl.create_default_context()
+        context.check_hostname = False
+        context.verify_mode=ssl.CERT_NONE
         context.load_verify_locations(os.getcwd() + '/domain.crt')
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

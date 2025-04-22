@@ -54,6 +54,7 @@ def run_server(server_address,is_secure=False):
         print(os.getcwd())
         cert_location = os.getcwd() + '/certs/'
         socket_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        socket_context.verify_flags = ssl.CERT_NONE
         socket_context.load_cert_chain(
             certfile=cert_location + 'domain.crt',
             keyfile=cert_location + 'domain.key'

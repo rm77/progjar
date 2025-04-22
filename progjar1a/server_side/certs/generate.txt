@@ -1,5 +1,5 @@
 create private key and certificate
- openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout domain.key -out domain.crt
+ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout domain.key -out domain.crt -config san.conf
 
 -req: x509 CSR management (cert signing request)
      x509-> public key infrastructure standard
