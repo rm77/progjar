@@ -7,7 +7,7 @@ from library import *
 import random
 
 class MyIRCClient(threading.Thread):
-    def __init__(self,ircserver='irc.undernet.org',ircport=6669):
+    def __init__(self,ircserver='irc.libera.chat',ircport=6667):
         self.ircserver = ircserver
         self.ircport = ircport
         self.sock = None
@@ -17,25 +17,29 @@ class MyIRCClient(threading.Thread):
         threading.Thread.__init__(self)
     def setwin(self,win):
         self.win = win
+    def motd(self,params):
+        kirim = f"MOTD\r\n"
+        self.win.addstr(kirim)
+        self.sock.sendall(kirim.encode())
     def auth(self,params):
         username = params[0]
         realname=params[1]
-        kirim = f"\nNICK {username}\n\nUSER {username} * * {realname}\n"
+        kirim = f"NICK {username}\r\nUSER {username} 0 * :{realname}\r\n"
         self.win.addstr(kirim)
         self.sock.sendall(kirim.encode())
     def join(self,params):
         namachannel = params[0]
-        kirim = f"JOIN {namachannel}\n"
+        kirim = f"JOIN {namachannel}\r\n"
         self.win.addstr(kirim)
         self.sock.sendall(kirim.encode())
     def sendmessage(self,params):
         tujuan=params[0]
         message=params[1]
-        kirim = f"PRIVMSG {tujuan} :{message} \n"
+        kirim = f"PRIVMSG {tujuan} :{message}\r\n"
         self.win.addstr(kirim)
         self.sock.sendall(kirim.encode())
     def ping(self,params):
-        kirim = f"PING {random.randint(10000,12000)} \n"       
+        kirim = f"PING {random.randint(10000,12000)}\r\n"       
         self.win.addstr(kirim)
         self.sock.sendall(kirim.encode())
     def stopit(self):
@@ -104,7 +108,6 @@ class MyUI(threading.Thread):
             boxwin.addstr(f"[C]---> {s.decode()}\n")
             boxwin.refresh()
             if s.decode()=="quit":
-                curses.endwin()
                 self.irc_client.stopit()
                 break
             result = self.input_processor.execute(s.decode())
