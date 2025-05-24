@@ -37,6 +37,7 @@ class ProcessTheClient(threading.Thread):
 						self.connection.sendall(hasil)
 						rcv=""
 						self.connection.close()
+						break
 				else:
 					break
 			except OSError as e:
