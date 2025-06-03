@@ -12,7 +12,7 @@ services:
     ports:
       - "60001:8888"
       - "50001:6666"
-      - "55555:5555"
+      - "55555:55555"
     environment:
       - "DOCKER_STACKS_JUPYTER_CMD=lab"
       - "GRANT_SUDO=yes"
