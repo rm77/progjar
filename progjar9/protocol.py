@@ -1,7 +1,8 @@
 import logging
 import json
 import shlex
-from logic import PlayerServerInterface
+#from logic import PlayerServerInterface
+from logic_v2 import PlayerServerInterface
 
 class PlayerServerProtocol:
     def __init__(self):
@@ -25,3 +26,4 @@ if __name__=='__main__':
     fp = PlayerServerProtocol()
     print(fp.proses_string("set_location 1 100 200"))
     print(fp.proses_string("get_location 1"))
+    print(fp.proses_string("get_all_players 0"))
